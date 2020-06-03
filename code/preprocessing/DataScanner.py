@@ -4,6 +4,7 @@
 import csv
 import numpy as np
 
+
 def scan(path):
     with open(path, 'r') as dataRows:
         while True:
@@ -24,13 +25,15 @@ def test_scan():
 
 def read_csv():
     with open('../../data/num_data.csv', 'r') as csv_file:
-        rows = csv.reader(csv_file)
-        for row in rows:
-            print(row[0],row[1])
+        reader = csv.reader(csv_file)
+        rows = [row for row in reader]
+        return np.asarray(rows, dtype=int)
 
 
 def test_read_csv():
-    read_csv()
+    data_rows = read_csv()
+    print(data_rows)
+    print(data_rows.shape)
 
 
 if __name__ == '__main__':
