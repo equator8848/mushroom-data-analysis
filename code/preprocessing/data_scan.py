@@ -39,7 +39,7 @@ def test_read_csv():
 
 def read_csv_pandas():
     names = get_names()
-    data = read_csv('../../data/num_data.csv', names=names, engine='python')
+    data = read_csv('../../data/num_data.csv', names=names)
     return data
 
 
