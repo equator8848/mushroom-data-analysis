@@ -27,7 +27,7 @@ def scatter_visual():
 def scatter_matrix_visual():
     data = read_csv_pandas()
     pd.plotting.scatter_matrix(data, figsize=(48, 48), diagonal='hist', marker='.')
-    plt.savefig("D:\\文件与文档\\学校课程\\数据挖掘\\数据挖掘实验\\mushroom-data-analysis\\report\\scatter_matrix_visual.png")
+    # plt.savefig("D:\\文件与文档\\学校课程\\数据挖掘\\数据挖掘实验\\mushroom-data-analysis\\report\\scatter_matrix_visual.png")
     plt.show()
 
 

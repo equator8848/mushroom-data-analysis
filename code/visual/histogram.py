@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 
 def histogram_visual():
     data = read_csv_pandas()
-    data.hist()
+    data.hist(sharex=False, sharey=False, xlabelsize=1, ylabelsize=1, figsize=(16, 10))
+    # plt.savefig("D:\\文件与文档\\学校课程\\数据挖掘\\数据挖掘实验\\mushroom-data-analysis\\report\\histogram_visual.png")
     plt.show()
 
 
