@@ -4,6 +4,7 @@
 import csv
 import numpy as np
 from pandas import read_csv
+from sklearn.model_selection import train_test_split
 
 
 def scan(path):
@@ -49,6 +50,17 @@ def get_names():
             'stalk-surface-below-ring',
             'stalk-color-above-ring', 'stalk-color-below-ring', 'veil-type', 'veil-color', 'ring-number', 'ring-type',
             'spore-print-color', 'population', 'habitat']
+
+
+def data_split():
+    data_set = read_csv_pandas()
+    arr = data_set.values
+    x = arr[:, 1:22]
+    y = arr[:, 0]
+    test_size = 0.2
+    seed = 7
+    # train_x,test_x,train_y,tets_y
+    return train_test_split(x, y, test_size=test_size, random_state=seed)
 
 
 def test_read_csv_pandas():
