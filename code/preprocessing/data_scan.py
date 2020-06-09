@@ -3,7 +3,8 @@
 # @Author  : Equator
 import csv
 import numpy as np
-from pandas import read_csv
+from pandas import read_csv, set_option, DataFrame
+import csv
 from sklearn.model_selection import train_test_split
 
 
@@ -52,21 +53,48 @@ def get_names():
             'spore-print-color', 'population', 'habitat']
 
 
+def __char_to_int():
+    names = get_names()
+    df = read_csv('../../data/agaricus-lepiota.data', names=names)
+    df.drop('stalk-root', axis=1, inplace=True)
+    df.drop('veil-type', axis=1, inplace=True)
+    df.drop('veil-color', axis=1, inplace=True)
+    # print(df.shape)
+    dataSet = []
+    for d in df._values:
+        data = []
+        for cidx in range(len(d)):
+            if cidx == 0:
+                if d[cidx] == 'p':
+                    data.append(0)
+                else:
+                    data.append(1)
+            else:
+                data.append(ord(d[cidx]) - ord('a'))
+        dataSet.append(data)
+    result = DataFrame(dataSet, columns=df.keys())
+    f = open('../../data/data_preceded.csv', 'w')
+    writer = csv.writer(f)
+    writer.writerow(result.keys())
+    writer.writerows(result.values)
+
+
+def get_total_data():
+    data = read_csv('../../data/data_preceded.csv')
+    return data
+
+
 def data_split():
-    data_set = read_csv_pandas()
+    data_set = get_total_data()
     arr = data_set.values
-    x = arr[:, 1:22]
+    x = arr[:, 1:arr.shape[1]]
     y = arr[:, 0]
-    test_size = 0.2
+    test_size = 0.3
     seed = 7
     # train_x,test_x,train_y,tets_y
     return train_test_split(x, y, test_size=test_size, random_state=seed)
 
 
-def test_read_csv_pandas():
-    data = read_csv_pandas()
-    print(data)
-
-
 if __name__ == '__main__':
-    test_read_csv_pandas()
+    __char_to_int()
+    get_total_data()

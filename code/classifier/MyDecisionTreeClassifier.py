@@ -1,16 +1,12 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2020/6/5 15:52
-# @Author  : Equator
+from sklearn.tree import DecisionTreeClassifier
+
 from code.classifier.BaseClassifier import BaseClassifier
-from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
-
 from code.preprocessing import data_scan
-from code.preprocessing.pca import PCA
 
 
-class BayesClassifier(BaseClassifier):
+class MyDecisionTreeClassifier(BaseClassifier):
     def __init__(self):
-        self.classifier = GaussianNB()
+        self.classifier = DecisionTreeClassifier()
 
     def train(self, train_data_x, train_data_y):
         self.classifier.fit(train_data_x, train_data_y)
@@ -21,7 +17,7 @@ class BayesClassifier(BaseClassifier):
 
 def train_and_test():
     train_x, test_x, train_y, test_y = data_scan.data_split()
-    classifier = BayesClassifier()
+    classifier = MyDecisionTreeClassifier()
     classifier.train(train_x, train_y)
     # 测试集
     print("验证测试集", train_x.shape)
@@ -30,8 +26,9 @@ def train_and_test():
         # print(data)
         test_data_x = test_x[i]
         test_data_y = test_y[i]
-        result = classifier.classify(test_data_x.reshape(1, 21))
-        print(test_data_x, test_data_y, result[0])
+        # print(data, test_data_x, test_data_y)
+        result = classifier.classify(test_data_x.reshape(1, 20))
+        print(result[0], test_data_y)
         if result[0] == test_data_y:
             correct_size = correct_size + 1
     print("正确率：%f%%" % (correct_size * 100 / test_x.shape[0]))
