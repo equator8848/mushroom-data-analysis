@@ -56,19 +56,20 @@ def get_names():
 def __char_to_int():
     names = get_names()
     df = read_csv('../../data/agaricus-lepiota.data', names=names)
+    # 去掉缺失值多的一列
     df.drop('stalk-root', axis=1, inplace=True)
     df.drop('veil-type', axis=1, inplace=True)
-    df.drop('veil-color', axis=1, inplace=True)
-    # print(df.shape)
     dataSet = []
     for d in df._values:
         data = []
         for cidx in range(len(d)):
+            # 标签
             if cidx == 0:
                 if d[cidx] == 'p':
                     data.append(0)
                 else:
                     data.append(1)
+            # 数据
             else:
                 data.append(ord(d[cidx]) - ord('a'))
         dataSet.append(data)
@@ -79,22 +80,23 @@ def __char_to_int():
     writer.writerows(result.values)
 
 
-def get_total_data():
-    data = read_csv('../../data/data_preceded.csv')
+def get_total_data(path):
+    data = read_csv(path)
     return data
 
 
-def data_split():
-    data_set = get_total_data()
+def data_split(path='../../data/data_preceded.csv'):
+    data_set = get_total_data(path)
     arr = data_set.values
     x = arr[:, 1:arr.shape[1]]
     y = arr[:, 0]
     test_size = 0.3
     seed = 7
-    # train_x,test_x,train_y,tets_y
+    # train_x,test_x,train_y,test_y
     return train_test_split(x, y, test_size=test_size, random_state=seed)
 
 
 if __name__ == '__main__':
     __char_to_int()
     get_total_data()
+    print('done')

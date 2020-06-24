@@ -24,7 +24,7 @@ def train_and_test():
     classifier = BayesClassifier()
     classifier.train(train_x, train_y)
     # 测试集
-    print("验证测试集", train_x.shape)
+    print("验证测试集", test_x.shape)
     correct_size = 0
     for i in range(len(test_y)):
         # print(data)

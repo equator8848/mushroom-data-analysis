@@ -12,7 +12,7 @@ def figure(data):
     cax = ax.matshow(data.corr(), vmin=-1, vmax=1, interpolation='none')
     fig.colorbar(cax)
     # 刻度
-    ticks = np.arange(0, 21, 1)
+    ticks = np.arange(0, 20, 1)
     ax.set_xticks(ticks)
     ax.set_yticks(ticks)
     names = list(data.columns)
