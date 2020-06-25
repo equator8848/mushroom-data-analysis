@@ -32,4 +32,4 @@ def scatter_matrix_visual():
 
 
 if __name__ == '__main__':
-    scatter_matrix_visual()
+    scatter_visual()

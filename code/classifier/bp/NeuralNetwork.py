@@ -2,6 +2,8 @@ import numpy as np
 
 
 class NeuralNetwork:
+    threshold = 26
+
     def __init__(self, layer_num, learn_step, neuron_num_each_layer):
         # 网络层数，包括输出层
         self.layer_num = layer_num
@@ -18,6 +20,10 @@ class NeuralNetwork:
             self.weight.append(np.random.random((self.neuron_num_each_layer[i + 1], self.neuron_num_each_layer[i])))
 
     def update(self, train_x, train_y):
+        train_x = train_x / 26
+        temp = np.zeros(2)
+        temp[train_y] = 1
+        train_y = np.array(temp)
         inputs = np.array(train_x, ndmin=2).T
         targets = np.array(train_y, ndmin=2).T
         # 正向传播
@@ -57,6 +63,7 @@ class NeuralNetwork:
         return list(inputs).index(max(list(inputs))) == list(test_y).index(1)
 
     def classify(self, test_x):
+        test_x = test_x / 26
         inputs = np.array(test_x, ndmin=2).T
         for i in range(self.layer_num):
             temp_inputs = np.dot(self.weight[i], inputs)

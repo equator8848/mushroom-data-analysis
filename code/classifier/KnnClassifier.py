@@ -13,7 +13,7 @@ class KnnClassifier(BaseClassifier):
         self.classifier.fit(train_data_x, train_data_y)
 
     def classify(self, test_data_x):
-        return self.classifier.predict(test_data_x)
+        return self.classifier.predict(test_data_x)[0]
 
 
 def train_and_test():
@@ -23,7 +23,7 @@ def train_and_test():
     # 测试集
     print("验证测试集", train_x.shape)
     correct_size = 0
-    for i  in range(len(test_y)):
+    for i in range(len(test_y)):
         # print(data)
         test_data_x = test_x[i]
         test_data_y = test_y[i]

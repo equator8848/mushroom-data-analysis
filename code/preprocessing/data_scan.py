@@ -93,7 +93,8 @@ def data_split(path='../../data/data_preceded.csv'):
     test_size = 0.3
     seed = 7
     # train_x,test_x,train_y,test_y
-    return train_test_split(x, y, test_size=test_size, random_state=seed)
+    train_x,test_x,train_y,test_y =  train_test_split(x, y, test_size=test_size, random_state=seed)
+    return train_x,test_x,train_y,test_y
 
 
 if __name__ == '__main__':

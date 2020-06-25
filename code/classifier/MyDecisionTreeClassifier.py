@@ -12,7 +12,7 @@ class MyDecisionTreeClassifier(BaseClassifier):
         self.classifier.fit(train_data_x, train_data_y)
 
     def classify(self, test_data_x):
-        return self.classifier.predict(test_data_x)
+        return self.classifier.predict(test_data_x)[0]
 
 
 def train_and_test():
